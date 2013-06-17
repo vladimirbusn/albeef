@@ -1,0 +1,24 @@
+.main
+  #jobs_page
+    .pics_module
+    .middle_with_citat
+      .red_line
+        .middle_full_block.noPd
+          %h1 ВАКАНСИИ
+    .desr_module
+      %h1 Название
+      .profes
+        %p
+          = @current_job.title.html_safe
+      %h1
+        Основные требования
+      %p
+        = @current_job.requirements.html_safe
+      %h1
+        Обязанности
+      %p
+        = @current_job.responsobilities.html_safe
+      %h1
+        Условия
+      %p
+        = @current_job.conditions.html_safe

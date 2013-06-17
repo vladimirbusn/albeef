@@ -1,0 +1,52 @@
+!!!
+%html{:lang => "ru"}
+  %head
+    %meta{:content => "IE=8", "http-equiv" => "X-UA-Compatible"}
+    %title ООО "АЛБИФ - мраморное мясо"
+    %link{:href => "/assets/layout/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon" }
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = styx_initialize
+  %body
+    / Live internet counter
+    :javascript
+      document.write("<a class='liveinternet' href='http://www.liveinternet.ru/click' "+"target=_blank><img src='//counter.yadro.ru/hit?t23.6;r"+ escape(document.referrer)+((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+";"+Math.random()+"' alt='' title='LiveInternet: показано число посетителей за"+" сегодня' "+"border='0' width='88' height='15'><\/a>") //
+    / end Live internet counter
+    / begin of Top100 code
+    %script#top100Counter{:src => "http://counter.rambler.ru/top100.jcn?2866322", :type => "text/javascript"}
+    %noscript
+      %a{:href => "http://top100.rambler.ru/navi/2866322/"}
+        %img{:alt => "Rambler's Top100", :border => "0", :src => "http://counter.rambler.ru/top100.cnt?2866322"}/
+    / end of Top100 code
+
+    / Rating@Mail.ru counter
+    :javascript
+      //
+      (function(w,n,d,r,s){(new Image).src='http://d5.c6.b3.a2.top.mail.ru/counter?id=2319781;js=13'+
+      ((r=d.referrer)?';r='+escape(r):'')+((s=w.screen)?';s='+s.width+'*'+s.height:'')+';_='+Math.random();})(window,navigator,document);//
+    %noscript
+      %div{:style => "position:absolute;left:-10000px;"}
+        %img{:alt => "Рейтинг@Mail.ru", :height => "1", :src => "http://d5.c6.b3.a2.top.mail.ru/counter?id=2319781;js=na", :style => "border:0;", :width => "1"}/
+    / //Rating@Mail.ru counter
+    .container
+      .thin_red_line
+        .middle
+      .header
+        .main_header
+          .inside_block
+            .top_part
+              = link_to( image_tag("/assets/layout/logo.png"), "/", {:class => "logo cf"} )
+              %ul.menu.cf
+                = render "layouts/menu"
+      = yield
+      .footer
+        .middle
+          .middle_wrap
+            .copyrights.cf
+              %ul
+                = render "layouts/menu"
+              %p &copy; <span class="year">2012</span> ООО "АЛБИФ". Все права защищены.
+            .footer_logo.cf
+
+

@@ -1,0 +1,57 @@
+.main
+  #contacts_page
+    .pics_module
+    .middle_with_citat
+      .red_line
+        .middle_full_block
+          %h1 КОНТАКТНЫЕ ДАННЫЕ
+    .text_module
+      %table
+        %tr
+          %td Адрес:
+          %td
+            = @contact.address
+        %tr
+          %td Телефон:
+          %td
+            = @contact.phone
+        %tr
+          %td Факс:
+          %td
+            = @contact.fax
+        %tr
+          %td E-mail:
+          %td
+            - emails_list = split_emails(@contact.emails)
+            - emails_list.each_with_index do |value, index|
+              %a{:href => "mailto:"+value}
+                - if (index+1) < emails_list.size
+                  = value+", "
+                - else
+                  = value
+    .map_module
+      -#= image_tag "/assets/contacts/map.png"
+      / Этот блок кода нужно вставить в ту часть страницы, где вы хотите разместить карту (начало)
+      #ymaps-map-id_1362986452555243523985{:style => "width: 600px; height: 338px;"}
+      %div{:style => "width: 600px; text-align: right;"}
+        %a{:href => "http://api.yandex.ru/maps/tools/constructor/index.xml", :style => "color: #1A3DC1; font: 13px Arial, Helvetica, sans-serif;", :target => "_blank"} Создано с помощью инструментов Яндекс.Карт
+      :javascript
+        function fid_1362986452555243523985(ymaps) {
+            var map = new ymaps.Map("ymaps-map-id_1362986452555243523985", {
+                center: [39.11332411913175, 52.20660933806178],
+                zoom: 11,
+                type: "yandex#map"
+            });
+            map.controls
+                .add("zoomControl")
+                .add("mapTools")
+                .add(new ymaps.control.TypeSelector(["yandex#map", "yandex#satellite", "yandex#hybrid", "yandex#publicMap"]));
+            map.geoObjects
+                .add(new ymaps.Placemark([39.13341045731372, 52.204620759851665], {
+                    balloonContent: 'ООО "АЛБИФ"'
+                }, {
+                    preset: "twirl#redDotIcon"
+                }));
+        };
+      %script{:src => "http://api-maps.yandex.ru/2.0-stable/?lang=ru-RU&coordorder=longlat&load=package.full&wizard=constructor&onload=fid_1362986452555243523985", :type => "text/javascript"}
+      / Этот блок кода нужно вставить в ту часть страницы, где вы хотите разместить карту (конец)
